@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Ease your Workout">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="delt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e88a7d"/>
+      <stop offset="100%" stop-color="#bf5c4c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g transform="translate(820,130)" opacity="0.95">
+    <path d="M120 360 C60 300 20 220 30 150 C70 100 120 80 160 80 C165 180 150 270 120 360 Z" fill="#ef4444" opacity="0.85"/>
+    <path d="M120 360 C110 260 110 160 115 82 C170 78 230 90 260 130 C255 230 210 320 120 360 Z" fill="#3b82f6"/>
+    <path d="M120 360 C180 300 240 220 250 120 C290 150 310 210 300 260 C280 320 220 360 120 360 Z" fill="#22c55e" opacity="0.85"/>
+  </g>
+  <g transform="translate(90,170)" font-family="system-ui, sans-serif" font-weight="800" letter-spacing="0.04em">
+    <text x="0" y="0" font-size="84" fill="#9fd6a8">EASE</text>
+    <text x="0" y="92" font-size="84" fill="#c3a5e8">YOUR</text>
+    <text x="0" y="184" font-size="84" fill="#8fd0d0">WORKOUT</text>
+    <text x="2" y="250" font-size="30" font-weight="600" fill="#94a3b8" letter-spacing="0">Explore the body · pick a muscle · discover exercises</text>
+    <text x="2" y="296" font-size="24" font-weight="500" fill="#64748b" letter-spacing="0">by easeur.com — free, no account, HD videos & step-by-step guides</text>
+  </g>
+</svg>

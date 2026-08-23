@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --color-brand-50: #eff6ff;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+}
+
+:root {
+  color-scheme: light;
+  --page: #f8fafc;
+  --surface: #ffffff;
+  --surface-soft: #f1f5f9;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --line: #e2e8f0;
+  --header: rgba(255, 255, 255, 0.9);
+  --logo-bg: #101820;
+  --logo-muted: #778296;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #080f17;
+  --surface: #111a24;
+  --surface-soft: #182330;
+  --text: #f1f5f9;
+  --text-muted: #9aa9bb;
+  --line: #273545;
+  --header: rgba(8, 15, 23, 0.9);
+  --logo-bg: #101820;
+  --logo-muted: #69758a;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--page);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--text);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+/* Easeur-family logo: two independently maintained theme assets. */
+.easeur-logo {
+  height: 52px;
+  width: auto;
+  border-radius: 10px;
+}
+html[data-theme="dark"] .easeur-logo-light { display: none; }
+html[data-theme="dark"] .easeur-logo-dark { display: block; }
+html[data-theme="light"] .easeur-logo-light { display: block; }
+html[data-theme="light"] .easeur-logo-dark { display: none; }
+@media (min-width: 640px) {
+  .easeur-logo { height: 60px; }
+}
+
+/* Global chrome */
+.site-header {
+  border-color: var(--line);
+  background: var(--header);
+}
+.site-nav-link { color: var(--text-muted); }
+.site-nav-link:hover { color: var(--text); background: var(--surface-soft); }
+.theme-toggle {
+  color: var(--text-muted);
+  background: var(--surface);
+  --tw-ring-color: var(--line);
+}
+.theme-toggle:hover { color: var(--text); background: var(--surface-soft); }
+
+/*
+ * Existing product UI uses Tailwind semantic slate/white utilities. These
+ * scoped overrides map them onto the dark theme without duplicating every
+ * component. Anatomy artwork itself remains on a neutral clinical canvas.
+ */
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] .bg-white\/85,
+html[data-theme="dark"] .bg-white\/90,
+html[data-theme="dark"] .bg-white\/95 {
+  background-color: var(--surface) !important;
+}
+html[data-theme="dark"] .bg-slate-50,
+html[data-theme="dark"] .bg-slate-100 {
+  background-color: var(--surface-soft) !important;
+}
+html[data-theme="dark"] .from-slate-50,
+html[data-theme="dark"] .from-blue-50 {
+  --tw-gradient-from: var(--surface-soft) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(24 35 48 / 0) var(--tw-gradient-to-position) !important;
+}
+html[data-theme="dark"] .to-white,
+html[data-theme="dark"] .to-blue-50 {
+  --tw-gradient-to: var(--surface) var(--tw-gradient-to-position) !important;
+}
+html[data-theme="dark"] .text-slate-950,
+html[data-theme="dark"] .text-slate-900,
+html[data-theme="dark"] .text-slate-800,
+html[data-theme="dark"] .text-slate-700 {
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .text-slate-600,
+html[data-theme="dark"] .text-slate-500,
+html[data-theme="dark"] .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+html[data-theme="dark"] .border-slate-200,
+html[data-theme="dark"] .border-slate-100 {
+  border-color: var(--line) !important;
+}
+html[data-theme="dark"] .ring-slate-200,
+html[data-theme="dark"] .ring-slate-100 {
+  --tw-ring-color: var(--line) !important;
+}
+html[data-theme="dark"] input {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+}
+html[data-theme="dark"] footer {
+  border-color: var(--line) !important;
+  background-color: var(--surface) !important;
+}
+
+/* Keep anatomy / exercise illustration canvases legible in both themes. */
+html[data-theme="dark"] img[src^="/anatomy/"],
+html[data-theme="dark"] img[src*="RepDB" i] {
+  background-color: #f8fafc;
+}
+
+/* Respect reduced-motion for all CSS-based animation/transition */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Easeur rainbow gradient text — matches the logo color family. */
+.easeur-rainbow {
+  background: linear-gradient(
+    90deg,
+    #73e6c7 0%,
+    #96d8dc 20%,
+    #9faef7 40%,
+    #c8a9f2 60%,
+    #f1a8be 80%,
+    #f29a8c 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Accessible skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+}
