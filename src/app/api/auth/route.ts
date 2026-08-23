@@ -1,3 +1,4 @@
+import { PRODUCT_CONFIG } from "@/lib/productConfig";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -12,6 +13,7 @@ import { normalizeEmail } from "@/lib/community";
  *                   { action: "logout", token }
  */
 export async function POST(request: Request) {
+  if (!PRODUCT_CONFIG.features.userWorkspace) return Response.json({ ok: false, error: "This V2 feature is disabled." }, { status: 404 });
   try {
     const body = (await request.json()) as Record<string, unknown>;
     const action = String(body.action ?? "");

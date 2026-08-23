@@ -73,6 +73,12 @@ html[data-theme="light"] .easeur-logo-dark { display: none; }
 }
 .site-nav-link { color: var(--text-muted); }
 .site-nav-link:hover { color: var(--text); background: var(--surface-soft); }
+.site-nav-row { scrollbar-width: none; }
+.site-nav-row::-webkit-scrollbar { display: none; }
+@media (min-width: 640px) {
+  .site-header > div { position: relative; min-height: 64px; }
+  .site-header .easeur-logo { height: 52px; }
+}
 .theme-toggle {
   color: var(--text-muted);
   background: var(--surface);

@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { AuthProvider } from "@/lib/auth";
 import { SITE } from "@/lib/site";
+import { PRODUCT_CONFIG } from "@/lib/productConfig";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -70,6 +71,15 @@ const themeScript = `
   } catch (_) {}
 })();`;
 
+function AppChrome({ children }: { children: ReactNode }) {
+  return <>
+    <a href="#main" className="skip-link">Skip to content</a>
+    <SiteHeader />
+    <main id="main">{children}</main>
+    <SiteFooter />
+  </>;
+}
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -77,12 +87,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="antialiased">
-        <AuthProvider>
-        <a href="#main" className="skip-link">Skip to content</a>
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
-        </AuthProvider>
+        {PRODUCT_CONFIG.features.userWorkspace ? (
+          <AuthProvider><AppChrome>{children}</AppChrome></AuthProvider>
+        ) : <AppChrome>{children}</AppChrome>}
       </body>
     </html>
   );

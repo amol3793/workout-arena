@@ -1,3 +1,5 @@
+import { PRODUCT_CONFIG } from "@/lib/productConfig";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CoachClient } from "./CoachClient";
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function CoachPage() {
+  if (!PRODUCT_CONFIG.features.userWorkspace) notFound();
   return (
     <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "AI Coach" }]} />

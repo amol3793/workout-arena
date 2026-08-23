@@ -130,3 +130,19 @@ Images live in `public/anatomy/`. If replaced:
 3. `docs/TRD.md`
 4. `docs/COMMUNITY_DATA.md`
 5. `docs/ZOOM_AUDIT.md`
+
+### Product version and datasource switches
+
+The public anatomy explorer is **V1** by default. User accounts, workout plans,
+progress tracking, and AI coaching are deliberately V2-only. Enable the V2
+workspace with `NEXT_PUBLIC_PRODUCT_VERSION=v2`.
+
+All external media and target-map sources are adapters behind `PRODUCT_CONFIG`.
+Disable one or more without modifying exercise records by setting a comma-separated
+`NEXT_PUBLIC_DISABLED_DATA_SOURCES` value, for example:
+
+```bash
+NEXT_PUBLIC_DISABLED_DATA_SOURCES=openGym,repdb,muscleMap
+```
+
+Available IDs: `ymove`, `freeExerciseDb`, `repdb`, `openGym`, `muscleMap`.

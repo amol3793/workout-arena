@@ -1,9 +1,11 @@
+import { PRODUCT_CONFIG } from "@/lib/productConfig";
 import { db } from "@/db";
 import { workoutSessions, workoutSets } from "@/db/schema";
 import { eq, desc, and } from "drizzle-orm";
 
 /** Log a workout set or complete a session. */
 export async function POST(request: Request) {
+  if (!PRODUCT_CONFIG.features.userWorkspace) return Response.json({ ok: false, error: "This V2 feature is disabled." }, { status: 404 });
   try {
     const body = (await request.json()) as Record<string, unknown>;
     const visitorId = String(body.visitorId ?? "");

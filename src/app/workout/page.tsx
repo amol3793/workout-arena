@@ -1,3 +1,5 @@
+import { PRODUCT_CONFIG } from "@/lib/productConfig";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { WorkoutClient } from "./WorkoutClient";
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function WorkoutPage() {
+  if (!PRODUCT_CONFIG.features.userWorkspace) notFound();
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "My Workout" }]} />

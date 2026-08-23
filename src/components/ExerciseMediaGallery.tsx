@@ -6,12 +6,12 @@ import {
   freeExerciseDbProvider,
   openGymProvider,
   repDbProvider,
-  resolveExerciseMedia,
   svgFigureProvider,
   ymoveVideoProvider,
 } from "@/lib/media";
 import type { MediaDescriptor } from "@/data/types";
 import { useReducedMotion } from "@/lib/useReducedMotion";
+import { isDataSourceEnabled } from "@/lib/productConfig";
 import { ExerciseFigure } from "@/lib/media/svgFigures";
 import { ExerciseTargetMap } from "./ExerciseTargetMap";
 
@@ -49,24 +49,24 @@ export function ExerciseMediaGallery({
   const tabs: Tab[] = [];
 
   // 1. Real-human video (YMove)
-  if (exercise.video) {
+  if (isDataSourceEnabled("ymove") && exercise.video) {
     const m = ymoveVideoProvider.resolve(exercise);
     tabs.push({ id: "video", label: "YMove video", icon: "▶", media: m });
   }
   // 2. Real-human photo sequence (free-exercise-db)
-  if (exercise.externalMediaId) {
+  if (isDataSourceEnabled("freeExerciseDb") && exercise.externalMediaId) {
     const m = freeExerciseDbProvider.resolve(exercise);
     if (m.type === "image-sequence") {
       tabs.push({ id: "photos", label: "Human photos", icon: "◉", media: m });
     }
   }
   // 3. Animated GIF demo (OpenGym / Gym visual)
-  if (exercise.openGymGif) {
+  if (isDataSourceEnabled("openGym") && exercise.openGymGif) {
     const m = openGymProvider.resolve(exercise);
     tabs.push({ id: "opengym-gif", label: "Animated demo", icon: "🎞", media: m });
   }
   // 4. Illustrated start/peak frames (RepDB)
-  if (exercise.repdbImageId) {
+  if (isDataSourceEnabled("repdb") && exercise.repdbImageId) {
     const m = repDbProvider.resolve(exercise);
     if (m.type === "image-sequence") {
       tabs.push({ id: "illustration", label: "RepDB illustration", icon: "◆", media: m });

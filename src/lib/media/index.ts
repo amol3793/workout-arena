@@ -1,4 +1,5 @@
 import type { Exercise, MediaDescriptor } from "@/data/types";
+import { isDataSourceEnabled } from "@/lib/productConfig";
 
 /**
  * Media provider abstraction — resolves the best available media per exercise.
@@ -116,10 +117,10 @@ export const openGymProvider: MediaProvider = {
 export const layeredProvider: MediaProvider = {
   id: "layered",
   resolve: (exercise) => {
-    if (exercise.video) return ymoveVideoProvider.resolve(exercise);
-    if (exercise.externalMediaId) return freeExerciseDbProvider.resolve(exercise);
-    if (exercise.repdbImageId) return repDbProvider.resolve(exercise);
-    if (exercise.openGymGif) return openGymProvider.resolve(exercise);
+    if (isDataSourceEnabled("ymove") && exercise.video) return ymoveVideoProvider.resolve(exercise);
+    if (isDataSourceEnabled("freeExerciseDb") && exercise.externalMediaId) return freeExerciseDbProvider.resolve(exercise);
+    if (isDataSourceEnabled("repdb") && exercise.repdbImageId) return repDbProvider.resolve(exercise);
+    if (isDataSourceEnabled("openGym") && exercise.openGymGif) return openGymProvider.resolve(exercise);
     return svgFigureProvider.resolve(exercise);
   },
 };
