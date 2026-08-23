@@ -22,7 +22,9 @@ export const PRODUCT_CONFIG = {
   version,
   features: {
     userWorkspace: version === "v2",
-    aiCoach: version === "v2",
+    // AI remains opt-in even after the V2 workspace is enabled. Keep it off
+    // for the current public release; set NEXT_PUBLIC_ENABLE_AI=true to enable.
+    aiCoach: version === "v2" && process.env.NEXT_PUBLIC_ENABLE_AI === "true",
   },
   dataSources: {
     ymove: !disabled.has("ymove"),

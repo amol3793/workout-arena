@@ -4,7 +4,7 @@ import { userProfiles } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function POST(request: Request) {
-  if (!PRODUCT_CONFIG.features.userWorkspace) return Response.json({ ok: false, error: "This V2 feature is disabled." }, { status: 404 });
+  if (!PRODUCT_CONFIG.features.userWorkspace || !PRODUCT_CONFIG.features.aiCoach) return Response.json({ ok: false, error: "This V2 feature is disabled." }, { status: 404 });
   try {
     const body = (await request.json()) as Record<string, unknown>;
     const visitorId = typeof body.visitorId === "string" ? body.visitorId : "";

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function WorkoutPage() {
-  if (!PRODUCT_CONFIG.features.userWorkspace) notFound();
+  if (!PRODUCT_CONFIG.features.userWorkspace || !PRODUCT_CONFIG.features.aiCoach) notFound();
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "My Workout" }]} />

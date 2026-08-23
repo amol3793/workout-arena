@@ -18,7 +18,9 @@ const USER_NAV = [
 ];
 
 export function SiteHeader() {
-  const nav = PRODUCT_CONFIG.features.userWorkspace ? [...PUBLIC_NAV, ...USER_NAV] : PUBLIC_NAV;
+  const nav = PRODUCT_CONFIG.features.userWorkspace
+    ? [...PUBLIC_NAV, ...USER_NAV.filter((item) => item.href !== "/coach" || PRODUCT_CONFIG.features.aiCoach)]
+    : PUBLIC_NAV;
   return (
     <header className="site-header sticky top-0 z-40 border-b backdrop-blur">
       <div className="mx-auto max-w-7xl px-3 py-2 sm:px-6 lg:px-8">

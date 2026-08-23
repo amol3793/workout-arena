@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { PRODUCT_CONFIG } from "@/lib/productConfig";
 import { useCallback, useEffect, useState } from "react";
 import { getVisitorId } from "@/lib/visitor";
 
@@ -103,14 +104,13 @@ export function ProgressClient() {
         ))}
       </ul>
 
-      <div className="mt-8 text-center">
-        <Link
-          href="/coach"
-          className="inline-flex rounded-xl bg-slate-900 px-6 py-3 text-sm font-bold text-white hover:bg-slate-800"
-        >
-          Ask AI Coach for progress analysis →
-        </Link>
-      </div>
+      {PRODUCT_CONFIG.features.aiCoach && (
+        <div className="mt-8 text-center">
+          <Link href="/coach" className="inline-flex rounded-xl bg-slate-900 px-6 py-3 text-sm font-bold text-white hover:bg-slate-800">
+            Ask AI Coach for progress analysis →
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

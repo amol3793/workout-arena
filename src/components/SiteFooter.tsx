@@ -3,7 +3,8 @@ import { PRODUCT_CONFIG } from "@/lib/productConfig";
 
 export function SiteFooter() {
   const userLinks = PRODUCT_CONFIG.features.userWorkspace ? [
-    ["/workout", "My Workout"], ["/progress", "Progress"], ["/coach", "AI Coach"],
+    ["/workout", "My Workout"], ["/progress", "Progress"],
+    ...(PRODUCT_CONFIG.features.aiCoach ? [["/coach", "AI Coach"] as const] : []),
   ] as const : [];
   return (
     <footer className="mt-16 border-t border-slate-200 bg-white">
